@@ -31,7 +31,7 @@ graph TD
     GCS(Ground Control Station) -. "868 MHz Radio" .-> TELE
     Remote(Remote Control) -. "RC Link" .-> RC_REC
     
-    subgraph RTK_Base_System (External Reference)
+    subgraph RTK_Base_System [External Reference]
         GPS_BASE(RTK GPS Base Station)
     end
     GPS_BASE -. "868 MHz RTCM Corrections" .-> GPS_ROVER
