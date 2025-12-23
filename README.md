@@ -31,7 +31,7 @@ graph TD
     PWR_SENS(Power Sensor) -- "Analog (U/I Data)" --> PIXHAWK
 
     %% Wireless Links
-    GCS(Ground Control Station<br>Ardupilot Mission Planner) -. "868 MHz Radio" .-> TELE
+    GCS(Ground Control Station<br>Ardupilot Mission Planner) <-. "868 MHz Radio" .-> TELE
     Remote(Remote Control<br>with EdgeTX) -. "ELRS Link" .-> RC_REC
 
     %% GPS RTK
@@ -39,7 +39,7 @@ graph TD
 
     %% Actuators (Outputs)
     PIXHAWK -- "PWM" --> ESC(ESC Motor Controller<br>AM32)
-    ESC --> MOT(2x Drive Motors)
+    ESC --> MOT(2x BLDC Drive Motors)
     
     PIXHAWK -- "PWM" --> SER(4x Servos<br>for Spray Cans)
 
@@ -47,8 +47,8 @@ graph TD
     classDef system fill:#e1f5fe,stroke:#01579b,stroke-width:2px;
     classDef software fill:#e8f5e9,stroke:#2e7d32;
     classDef external fill:#fff9c4,stroke:#fbc02d;
-    class PIXHAWK,GPS_BASE system;
-    class GCS software;
+    class PIXHAWK,GPS_BASE,Remote system;
+    class GCS,AP software;
 ```
 
 ### Electrical Design
