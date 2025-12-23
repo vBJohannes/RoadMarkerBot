@@ -10,10 +10,11 @@ The profile of the modules can be found [HERE](./HostTelemetry_XBeeSX686_fwA00A.
 ## Case
 
 In this project a nice little case was designed, that was intended to house two modules, but was used by only one in the end.
-![telemetry_case1](./telemetry_case1.jpeg)
-![telemetry_case2](./telemetry_case2.jpeg)
+![telemetry_case1](./telemetry_case1.jpg)
+![telemetry_case2](./telemetry_case2.jpg)
 
 ## PCB
 
-For this project a custom PCB was designed. The KiCAD project can be found [HERE](./Telemtry_PCB.zip).
-![telemetry_board](./telemetry_pcb.png)
+For this project a custom PCB was designed. The KiCAD project can be found [HERE](./telemetry_pcb.zip).
+![telemetry_pcb1](./telemetry_pcb1.png)
+![telemetry_pcb2](./telemetry_pcb2.jpg)
