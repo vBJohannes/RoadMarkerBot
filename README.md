@@ -32,11 +32,9 @@ graph TD
     %% Wireless Links
     GCS(Ground Control Station<br>Ardupilot Mission Planner) -. "868 MHz Radio" .-> TELE
     Remote(Remote Control<br>with EdgeTX) -. "ELRS Link" .-> RC_REC
-    
-    subgraph RTK_Base_System [External Reference]
-        GPS_BASE(RTK GPS Base Station)
-    end
-    GPS_BASE -. "868 MHz RTCM Corrections" .-> GPS_ROVER
+
+    %% GPS RTK
+    GPS_BASE(RTK GPS Base Station) -. "868 MHz RTCM Corrections" .-> GPS_ROVER
 
     %% Actuators (Outputs)
     PIXHAWK -- "PWM" --> ESC(ESC Motor Controller<br>AM32)
