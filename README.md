@@ -171,7 +171,16 @@ Built with:
 
 <details>
 <summary>ROVER: Images</summary>
-ROVER: Pixhawk Config
+![frame_iso](rover/bare_frame_iso.png)
+![frame_top](rover/bare_frame_top.png)
+![wheel_assembly](rover/wheel_assembly.png)
+![third_wheel_top](rover/third_wheel_top.png)
+![third_wheel_bottom](rover/third_wheel_bottom.png)
+![sprayer_assembly](rover/sprayer_assembly.png)
+![sprayer_assembly_bottom](rover/sprayer_assembly_bottom.png)
+![sprayer_assembly_bottom_nocover](rover/sprayer_assembly_bottom_nocover.png)
+![mounts_for_electronics](rover/mounts_for_electronics.png)
+![full_model](rover/full_model.png)
 </details>
 
 <details>
