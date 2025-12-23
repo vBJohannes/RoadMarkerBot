@@ -32,7 +32,7 @@ graph TD
 
     %% Wireless Links
     GCS(Ground Control Station<br>Ardupilot Mission Planner) <-. "868 MHz Radio" .-> TELE
-    Remote(Remote Control<br>with EdgeTX) -. "ELRS Link" .-> RC_REC
+    Remote(Remote Control<br>with EdgeTX) <-. "ELRS Link" .-> RC_REC
 
     %% GPS RTK
     GPS_BASE(RTK GPS Base Station) -. "868 MHz RTCM Corrections" .-> GPS_ROVER
@@ -42,13 +42,6 @@ graph TD
     ESC --> MOT(2x BLDC Drive Motors)
     
     PIXHAWK -- "PWM" --> SER(4x Servos<br>for Spray Cans)
-
-    %% Styling
-    classDef system fill:#e1f5fe,stroke:#01579b,stroke-width:2px;
-    classDef software fill:#e8f5e9,stroke:#2e7d32;
-    classDef external fill:#fff9c4,stroke:#fbc02d;
-    class PIXHAWK,GPS_BASE,Remote system;
-    class GCS,AP software;
 ```
 
 ### Electrical Design
@@ -86,13 +79,6 @@ graph TD
     %% Control Signals (Simplified)
     PH -. "PWM" .-> ESC
     PH -. "PWM" .-> S_ALL
-
-    %% Styling
-    style BAT fill:#f96,stroke:#333
-    style SENS fill:#ffeb3b,stroke:#fbc02d,stroke-width:2px
-    style PH fill:#cfd8dc,stroke:#455a64
-    style REG1 fill:#e1f5fe,stroke:#01579b
-    style REG2 fill:#e1f5fe,stroke:#01579b
 ```
 
 #### RTK Base Station
@@ -102,54 +88,35 @@ graph TD
     %% Power Source
     PB(USB Power Bank) -- "5V via USB" --> BASE_GPS(RTK GPS Base Module)
 
-    %% Data & Communication
-    subgraph Base_Unit [Base Station Core]
-        BASE_GPS
-        RADIO(868 MHz Radio Module)
-    end
-
     %% Internal Connection
-    BASE_GPS -- "UART / Data" --> RADIO
+    BASE_GPS -- "UART (RTCM3x)" --> RADIO(Radio Module<br>on Base)
 
     %% Wireless Output
-    RADIO -. "868 MHz RTCM Corrections" .-> ROVER(Rover / Robot)
-
-    %% Styling
-    style PB fill:#f96,stroke:#333,stroke-width:2px
-    style BASE_GPS fill:#e1f5fe,stroke:#01579b
-    style RADIO fill:#fff9c4,stroke:#fbc02d
-    style ROVER fill:#cfd8dc,stroke:#455a64,stroke-dasharray: 5 5
+    RADIO -. "868 MHz RTCM Corrections" .-> ROVER(Radio Module<br>on Rover)
 ```
 
 #### Survey Stick
 
 ```mermaid
 graph TD
-    %% Power Source
-    PB(USB Power Bank) -- "5V via USB" --> ESP(ESP32 / ESP8266)
     
     %% Communication & Interface
-    subgraph Handheld_Unit [Survey Tool Core]
+    subgraph Handheld_Unit [Survey Tool]
         ESP
-        BTN(Push Button / Trigger)
-        GPS_ROV
-        RADIO(868 MHz Radio Module)
+        BTN(Push Button)
+        GPS_ROV(GPS from Rover)
+        RADIO(Radio Module<br>from Rover)
     end
+    ESP(ESP8266)
 
     %% Data Connections
-    RADIO -- "RTCM Corrections" --> GPS_ROV
-    GPS_ROV -- "UART (NMEA), 5V" --> ESP
-    BTN -- "GPIO / Digital Input" --> ESP
+    RADIO -- "UART (RTCM3x)" --> GPS_ROV
+    GPS_ROV -- "UART (NMEA)" --> ESP
+    BTN -- "Trigger" --> ESP
 
     %% External Links
-    BASE(RTK Base Station) -. "868 MHz Link" .-> RADIO
-    ESP -. "WiFi (GPS Data Transfer)" .-> SERVER(Smartphone / Laptop / Server)
-
-    %% Styling
-    style PB fill:#f96,stroke:#333
-    style ESP fill:#e1f5fe,stroke:#01579b,stroke-width:2px
-    style BTN fill:#ffc107,stroke:#333
-    style GPS_ROV fill:#fff9c4,stroke:#fbc02d
+    BASE(RTK Base Station) -. "868 MHz RCTM Corrections" .-> RADIO
+    ESP -- "UART (NMEA) via USB" --> SERVER(Mobile Device)
 ```
 
 ### Mechanical Design
