@@ -169,11 +169,11 @@ Built with:
 - autonomous control via ArduPilot software
 - four spray cans can be mounted and all spray to the same point
 
+![frame_iso](rover/bare_frame_iso.png)
 <details>
 <summary>ROVER: Images</summary>
 
 ```markdown
-![frame_iso](rover/bare_frame_iso.png)
 ![frame_top](rover/bare_frame_top.png)
 ![wheel_assembly](rover/wheel_assembly.png)
 ![third_wheel_top](rover/third_wheel_top.png)
