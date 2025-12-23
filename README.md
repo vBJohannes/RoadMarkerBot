@@ -15,23 +15,23 @@ An open-source road marking bot with
 ```mermaid
 graph TD
     %% Central Unit
-    subgraph PIXHAWK [Pixhawk Flight Controller]
+    subgraph PIXHAWK [Pixhawk 2.4.8 Flight Controller]
         CPU(Processor / ArduPilot / PX4)
         IMU_INT(Internal Gyro / IMU)
     end
 
     %% Sensors & Inputs
-    IMU_EXT(External Gyro / IMU) -- "I2C Bus" --> PIXHAWK
+    IMU_EXT(External Gyro) -- "I2C Bus" --> PIXHAWK
     GPS_ROVER(RTK GPS Rover) -- "UART" --> PIXHAWK
     RC_REC(RC Receiver) -- "UART" --> PIXHAWK
     TELE(Telemetry Module) -- "UART (MAVLink)" --> PIXHAWK
     
     %% Power Monitoring (New)
-    PWR_SENS(Power Sensor) -- "Analog (V/I Data)" --> PIXHAWK
+    PWR_SENS(Power Sensor) -- "Analog (U/I Data)" --> PIXHAWK
 
     %% Wireless Links
-    GCS(Ground Control Station) -. "868 MHz Radio" .-> TELE
-    Remote(Remote Control) -. "RC Link" .-> RC_REC
+    GCS(Ground Control Station<br>Ardupilot Mission Planner) -. "868 MHz Radio" .-> TELE
+    Remote(Remote Control<br>with EdgeTX) -. "ELRS Link" .-> RC_REC
     
     subgraph RTK_Base_System [External Reference]
         GPS_BASE(RTK GPS Base Station)
@@ -39,18 +39,17 @@ graph TD
     GPS_BASE -. "868 MHz RTCM Corrections" .-> GPS_ROVER
 
     %% Actuators (Outputs)
-    PIXHAWK -- "PWM" --> ESC(ESC Motor Controller)
+    PIXHAWK -- "PWM" --> ESC(ESC Motor Controller<br>AM32)
     ESC --> MOT(2x Drive Motors)
     
-    PIXHAWK -- "PWM" --> SER(4x Servos)
+    PIXHAWK -- "PWM" --> SER(4x Servos<br>for Spray Cans)
 
     %% Styling
-    classDef hardware fill:#e1f5fe,stroke:#01579b,stroke-width:2px;
+    classDef system fill:#e1f5fe,stroke:#01579b,stroke-width:2px;
+    classDef software fill:#e8f5e9,stroke:#2e7d32;
     classDef external fill:#fff9c4,stroke:#fbc02d;
-    classDef rtk fill:#e8f5e9,stroke:#2e7d32;
-    class PIXHAWK hardware;
-    class IMU_EXT,GPS_ROVER,RC_REC,TELE,PWR_SENS external;
-    class GPS_BASE rtk;
+    class PIXHAWK,GPS_BASE system;
+    class GCS software;
 ```
 
 ### Electrical Design
@@ -60,10 +59,10 @@ graph TD
 ```mermaid
 graph TD
     %% Power Source and Monitoring
-    BAT(4S LiPo Battery<br/>14.8V - 16.8V) --> SENS(Power Sensor / <br/>Current & Voltage)
+    BAT(4-6S LiPo Battery) --> SENS(Power Sensor / <br/>Current & Voltage)
     
     %% Monitoring Link
-    SENS -- "Analog Data (V/I)" --> PH(Pixhawk Flight Controller)
+    SENS -- "Analog Data (U/I)" --> PH(Pixhawk Flight Controller)
 
     %% Direct Power Distribution
     SENS --> ESC(Dual ESC<br/>Motor Controller)
