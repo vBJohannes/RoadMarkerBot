@@ -171,6 +171,8 @@ Built with:
 
 <details>
 <summary>ROVER: Images</summary>
+
+```markdown
 ![frame_iso](rover/bare_frame_iso.png)
 ![frame_top](rover/bare_frame_top.png)
 ![wheel_assembly](rover/wheel_assembly.png)
@@ -181,6 +183,8 @@ Built with:
 ![sprayer_assembly_bottom_nocover](rover/sprayer_assembly_bottom_nocover.png)
 ![mounts_for_electronics](rover/mounts_for_electronics.png)
 ![full_model](rover/full_model.png)
+```
+
 </details>
 
 <details>
