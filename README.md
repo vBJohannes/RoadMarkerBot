@@ -169,57 +169,16 @@ Built with:
 - autonomous control via ArduPilot software
 - four spray cans can be mounted and all spray to the same point
 
-![frame_iso](rover/bare_frame_iso.png)
-<details>
-<summary>ROVER: Images</summary>
+Detailed images of the rover can be found [HERE](./rover/gallery.md).
 
-```markdown
-![frame_top](rover/bare_frame_top.png)
-![wheel_assembly](rover/wheel_assembly.png)
-![third_wheel_top](rover/third_wheel_top.png)
-![third_wheel_bottom](rover/third_wheel_bottom.png)
-![sprayer_assembly](rover/sprayer_assembly.png)
-![sprayer_assembly_bottom](rover/sprayer_assembly_bottom.png)
-![sprayer_assembly_bottom_nocover](rover/sprayer_assembly_bottom_nocover.png)
-![mounts_for_electronics](rover/mounts_for_electronics.png)
-![full_model](rover/full_model.png)
-```
+Detailed images of the base station can be found [HERE](./base/gallery.md).
 
-</details>
-
-<details>
-<summary>BASE: Images</summary>
-ROVER: Pixhawk Config
-</details>
-
-<details>
-<summary>SURVEY TOOL: Images</summary>
-ROVER: Pixhawk Config
-</details>
+Detailed images of the survey tool can be found [HERE](./survey_tool/gallery.md).
 
 #### Config Files
 
-<details>
-<summary>ROVER: Pixhawk Config</summary>
-ROVER: Pixhawk Config
-</details>
+A detailed list of the config files needed for the rover can be found [HERE](./rover/config.md).
 
-<details>
-<summary>ROVER: uBlox F9P Config</summary>
-ROVER: uBlox F9P Config
-</details>
+A detailed list of the config files needed for the base station can be found [HERE](./rover/config.md).
 
-<details>
-<summary>ROVER: ESC Config</summary>
-ROVER: ESC Config
-</details>
-
-<details>
-<summary>BASE: uBlox F9P Config</summary>
-BASE: uBlox F9P Config
-</details>
-
-<details>
-<summary>SURVEY TOOL: ESP Config</summary>
-SURVEY TOOL: ESP Config
-</details>
+A detailed list of the config files needed for the survey tool can be found [HERE](./rover/config.md).
