@@ -15,8 +15,9 @@ An open-source road marking bot with
 ```mermaid
 graph TD
     %% Central Unit
-    subgraph PIXHAWK [Pixhawk 2.4.8<br>Flight Controller]
-        CPU(Processor / ArduPilot / PX4)
+    subgraph PIXHAWK [Pixhawk 2.4.8]
+        AP(ArduPilot)
+        CPU(Processor)
         IMU_INT(Internal Gyro / IMU)
     end
 
