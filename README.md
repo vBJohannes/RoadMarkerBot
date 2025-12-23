@@ -147,3 +147,5 @@ A detailed list of the config files needed for the rover can be found [HERE](./r
 A detailed list of the config files needed for the base station can be found [HERE](./rover/config.md).
 
 A detailed list of the config files needed for the survey tool can be found [HERE](./rover/config.md).
+
+A detailed list of config files and parts for the Ground Control Station can be found [HERE](./gcs/readme.md)
