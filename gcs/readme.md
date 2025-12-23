@@ -7,14 +7,24 @@ In this project a XBee SX 686 module was used, which had the advantage of substa
 The profile of the modules can be found [HERE](./HostTelemetry_XBeeSX686_fwA00A.xpro) and can be used with the [XCTU Tool](https://www.digi.com/products/embedded-systems/digi-xbee/digi-xbee-tools/xctu) to configure the module.
 **Hint:** The guard time in that profile is set to 5000ms and this needs to be configured in the XCTU Tool itself as well.
 
-## Case
+## Mission Planner
+
+Choose the proper COM port to get access to the data coming from the XBee module.
+In this project a 115200 8N1 was chosen as baud rate.
+![mission_planner](./mission_planner.png)
+
+
+## Equipment
+
+### Case
 
 In this project a nice little case was designed, that was intended to house two modules, but was used by only one in the end.
 ![telemetry_case1](./telemetry_case1.jpg)
 ![telemetry_case2](./telemetry_case2.jpg)
 
-## PCB
+### PCB
 
 For this project a custom PCB was designed. The KiCAD project can be found [HERE](./telemetry_pcb.zip).
+The lower picture shows an earlier version of the board.
 ![telemetry_pcb1](./telemetry_pcb1.png)
 ![telemetry_pcb2](./telemetry_pcb2.jpg)
