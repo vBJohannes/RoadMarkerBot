@@ -1,5 +1,7 @@
 # RoadMarkerBot
+
 An open-source road marking bot with
+
 - skid steering
 - differential GPS (Base + Rover)
 - Ardupilot
@@ -159,12 +161,28 @@ An extensible design was chosen to allow quick modifications.
 Overall vehicle dimensions: width 600 mm, length 500 mm, height 400 mm
 
 Built with:
+
 - 20×20 mm aluminium extrusions to mount various components
 - high gear reduction on the motors for precise maneuvers
 - simple power supply using 18 V batteries compatible with Makita or Bosch
 - readily available hobby-model parts
 - autonomous control via ArduPilot software
 - four spray cans can be mounted and all spray to the same point
+
+<details>
+<summary>ROVER: Images</summary>
+ROVER: Pixhawk Config
+</details>
+
+<details>
+<summary>BASE: Images</summary>
+ROVER: Pixhawk Config
+</details>
+
+<details>
+<summary>SURVEY TOOL: Images</summary>
+ROVER: Pixhawk Config
+</details>
 
 #### Config Files
 
