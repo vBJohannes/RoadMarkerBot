@@ -13,7 +13,6 @@ Choose the proper COM port to get access to the data coming from the XBee module
 In this project a 115200 8N1 was chosen as baud rate.
 ![mission_planner](./mission_planner.png)
 
-
 ## Equipment
 
 ### Case
@@ -28,3 +27,7 @@ For this project a custom PCB was designed. The KiCAD project can be found [HERE
 The lower picture shows an earlier version of the board.
 ![telemetry_pcb1](./telemetry_pcb1.png)
 ![telemetry_pcb2](./telemetry_pcb2.jpg)
+
+<a id="base_station_gps"></a>
+### GPS
+
