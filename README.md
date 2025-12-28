@@ -1,6 +1,6 @@
 # RoadMarkerBot
 
-An open-source road marking bot with
+An open-source road marking rover with
 
 - skid steering
 - differential GPS (Base + Rover)
@@ -8,144 +8,66 @@ An open-source road marking bot with
 - multiple colors
 - dual use as a survey tool.
 
-## Architecture
+## Requirements
 
-### System Architecture
+- The rover should be able to spray a dot onto pavement at a position defined by GPS.
+- The rover should be remotely controllable in order to halt its operation, move around obstacles, and manually drive it for small distances.
+- The rover should accept a series of GPS positions in order to mark more complicated tracks.
+- The rover should ideally be constructed from off-the-shelf components for easy replacement.
+- Rover GPS can be also used as survey tool for manual measurements without the need to move the rover there.
+
+## Solution
+
+The system is divided into subsystems in order to fulfil the requirements.
+
+- The rover is constructed a skid steer robot to realize turning on the spot.
+- The rover uses differential GPS for accurate positioning.
+- The rover uses ArduPilot in order to provide a platform for vehicle movement and an interface to input target GPS positions.
+- The rover can carry four different spray cans at once to use different colors without manual interaction.
+- The rover is controlled with an ELRS rc controller in order to provide easy manual input.
+- The rover is mainly constucted from aluminium extrusions, 3D prints, rc hobby electronics and available software.
+
+### Architecture
 
 ```mermaid
 graph TD
-    %% Central Unit
-    subgraph PIXHAWK [Pixhawk 2.4.8]
-        AP(ArduPilot)
-        CPU(Processor)
-        IMU_INT(Internal Gyro / IMU)
+    %% Rover
+    subgraph ROVER [Rover]
+        AP_ROVER(ArduPilot)
+        TELEM_ROVER(Rover Communication Module)
+        GPS_ROVER(GPS Module)
+        GPS_CORR_ROVER(GPS Communication Module)
     end
 
-    %% Sensors & Inputs
-    IMU_EXT(External Gyro) -- "I2C Bus" --> PIXHAWK
-    GPS_ROVER(RTK GPS Rover) -- "UART" --> PIXHAWK
-    RC_REC(RC Receiver) -- "UART" --> PIXHAWK
-    TELE(Telemetry Module) -- "UART (MAVLink)" --> PIXHAWK
-    
-    %% Power Monitoring (New)
-    PWR_SENS(Power Sensor) -- "Analog (U/I Data)" --> PIXHAWK
-
-    %% Wireless Links
-    GCS(Ground Control Station<br>Ardupilot Mission Planner) <-. "868 MHz Radio" .-> TELE
-    Remote(Remote Control<br>with EdgeTX) <-. "ELRS Link" .-> RC_REC
-
-    %% GPS RTK
-    GPS_BASE(RTK GPS Base Station) -. "868 MHz RTCM Corrections" .-> GPS_ROVER
-
-    %% Actuators (Outputs)
-    PIXHAWK -- "PWM" --> ESC(ESC Motor Controller<br>AM32)
-    ESC --> MOT(2x BLDC Drive Motors)
-    
-    PIXHAWK -- "PWM" --> SER(4x Servos<br>for Spray Cans)
-```
-
-### Electrical Design
-
-#### Rover
-
-```mermaid
-graph TD
-    %% Power Source and Monitoring
-    BAT(4-6S LiPo Battery) --> SENS(Power Sensor / <br/>Current & Voltage)
-    
-    %% Monitoring Link
-    SENS -- "Analog Data (U/I)" --> PH(Pixhawk Flight Controller)
-
-    %% Direct Power Distribution
-    SENS --> ESC(Dual ESC<br/>Motor Controller)
-    SENS --> REG1(5V Voltage Regulator<br/>Logic Supply)
-    SENS --> REG2(5V Voltage Regulator<br/>Servo Supply)
-
-    %% Drive System
-    ESC --> M1(Drive Motor Left)
-    ESC --> M2(Drive Motor Right)
-
-    %% Logic Supply Path
-    REG1 --> PH
-    PH --> GPS(RTK GPS Rover)
-    PH --> TELE(Telemetry Module)
-    PH --> RC(RC Receiver)
-    PH --> GYRO(External Gyro / IMU)
-
-    %% Servo Supply Path
-    REG2 --> SERVO_BUS(Servo Rail)
-    SERVO_BUS --> S_ALL(4x Servos)
-
-    %% Control Signals (Simplified)
-    PH -. "PWM" .-> ESC
-    PH -. "PWM" .-> S_ALL
-```
-
-#### RTK Base Station
-
-```mermaid
-graph TD
-    %% Power Source
-    PB(USB Power Bank) -- "5V via USB" --> BASE_GPS(RTK GPS Base Module)
-
-    %% Internal Connection
-    BASE_GPS -- "UART (RTCM3x)" --> RADIO(Radio Module<br>on Base)
-
-    %% Wireless Output
-    RADIO -. "868 MHz RTCM Corrections" .-> ROVER(Radio Module<br>on Rover)
-```
-
-#### Survey Stick
-
-```mermaid
-graph TD
-    
-    %% Communication & Interface
-    subgraph Handheld_Unit [Survey Tool]
-        ESP
-        BTN(Push Button)
-        GPS_ROV(GPS from Rover)
-        RADIO(Radio Module<br>from Rover)
+    subgraph sg1 [GPS Base Station]
+        GPS_BASE(GPS Module)
+        GPS_CORR_BASE(GPS Communication Module)
     end
-    ESP(ESP8266)
 
-    %% Data Connections
-    RADIO -- "UART (RTCM3x)" --> GPS_ROV
-    GPS_ROV -- "UART (NMEA)" --> ESP
-    BTN -- "Trigger" --> ESP
+    subgraph MP_BASE [Rover Control Base Station]
+        AP_BASE(ArduPilot Mission Planner)
+        TELEM_BASE(ArduPilot Base Station Communication Module)
+    end
 
-    %% External Links
-    BASE(RTK Base Station) -. "868 MHz RCTM Corrections" .-> RADIO
-    ESP -- "UART (NMEA) via USB" --> SERVER(Mobile Device)
+    %% Connections
+    TELEM_ROVER <-. "Telemetry Data" .-> TELEM_BASE
+    GPS_CORR_BASE -. "GPS Correction Data" .-> GPS_CORR_ROVER
+    GPS_CORR_ROVER --> GPS_ROVER
+    GPS_ROVER --> AP_ROVER
+    TELEM_ROVER <--> AP_ROVER
+    TELEM_BASE <--> AP_BASE
+    GPS_BASE --> GPS_CORR_BASE
 ```
 
-### Mechanical Design
+### In Detail
 
-The robot was designed as a skid steer vehicle with a trailing third wheel.
-An extensible design was chosen to allow quick modifications.
-Overall vehicle dimensions: width 600 mm, length 500 mm, height 400 mm
+[LINK TO ROVER DOCUMENTATION](./rover/README.md)<br>
+[LINK TO GPS BASE STATION DOCUMENTATION](./rover/config.md)<br>
+[LINK TO CONTROL BASE STATION DOCUMENTATION](./rover/config.md)<br>
+[LINK TO SURVEY TOOL DOCUMENTATION](./rover/config.md)
 
-Built with:
+## Known Issues
 
-- 20×20 mm aluminium extrusions to mount various components
-- high gear reduction on the motors for precise maneuvers
-- simple power supply using 18 V batteries compatible with Makita or Bosch
-- readily available hobby-model parts
-- autonomous control via ArduPilot software
-- four spray cans can be mounted and all spray to the same point
-
-Detailed images of the rover can be found [HERE](./rover/gallery.md).
-
-Detailed images of the base station can be found [HERE](./base/gallery.md).
-
-Detailed images of the survey tool can be found [HERE](./survey_tool/gallery.md).
-
-#### Config Files
-
-A detailed list of the config files needed for the rover can be found [HERE](./rover/config.md).
-
-A detailed list of the config files needed for the base station can be found [HERE](./rover/config.md).
-
-A detailed list of the config files needed for the survey tool can be found [HERE](./rover/config.md).
-
-A detailed list of config files and parts for the Ground Control Station can be found [HERE](./gcs/readme.md)
+- ArduPilot on Rover currently can only handle around 100 waypoints.
+- Rover initialization is currently driving in a large circle to be able to fully use the gyroscope. Magnetometer is currently disabled due to inreliable operation. Hence initial heading is unclear to ArduPilot and it needs to calibrate itself using gyroscope in GPS before starting any mission.
+- Starting any movement looks a little jenky and stopping is quite abrupt, which hints to improper PID calibration or ESC configuration.
