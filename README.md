@@ -61,10 +61,10 @@ graph TD
 
 ### In Detail
 
-[LINK TO ROVER DOCUMENTATION](./rover/README.md)<br>
-[LINK TO GPS BASE STATION DOCUMENTATION](./rover/config.md)<br>
-[LINK TO CONTROL BASE STATION DOCUMENTATION](./rover/config.md)<br>
-[LINK TO SURVEY TOOL DOCUMENTATION](./rover/config.md)
+[Rover Documentation](./rover/README.md)<br>
+[GPS Base Station Documentation](./rover/config.md)<br>
+[Control Base Station Documentation](./rover/config.md)<br>
+[Survey Tool Documentation](./rover/config.md)
 
 ## Known Issues
 

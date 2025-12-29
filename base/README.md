@@ -27,14 +27,14 @@ The antenna is put to the corner of the upper shield to be also elevated off the
 ![gps_base_detail1](./img/gps_base_detail1.jpg)
 ![gps_base_detail2](./img/gps_base_detail2.jpg)
 
-# Usage
+## Usage
 
-- The antenna is placed on a dedicated spot and the ground is marked so the antenna can be placed there repeatedly in the exact same configuration.
-- Ideally the spot is surveyed in by using the antenna, a laptop, some free Ntrip data service like [RTK2Go](http://rtk2go.com), and the rover GPS config (see [Rover GPS Config](ROVER_LINKS)) to figure out the exact position the GPS is used in.
-This can then be entered in the entered in the config of the GPS to run it in fixed mode.
+- The antenna is placed on a dedicated spot and the ground is marked so the antenna can be placed there repeatedly in the exact same position.
+- Ideally the spot is surveyed in by using the antenna, a laptop with [u-Center](https://www.u-blox.com/en/product/u-center), some free Ntrip data service like [RTK2Go](http://rtk2go.com), and the rover GPS config (see [Rover GPS Config](ROVER_LINKS)) to find the exact position the GPS is currently in.
+This can then be entered in the config of the GPS base station to run it in fixed mode.
 - Both communication modules need to use the same config to communicate properly.
 
-# Links
+## Links
 
 [GPS Base uBlox Config](./config/uBlox_F9P_Base_config.txt)<br>
 [XBee RTCM Config](./config/GPS_RTCM_XBeeSX686_fwA00A.xpro)
