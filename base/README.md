@@ -5,10 +5,11 @@
 ```mermaid
 graph TD
     %% Power Source
-    PB(USB Power Bank) -- "5V via USB" --> BASE_GPS(RTK GPS Base Module)
+    PB(USB Power Bank or<br>other power source) -- "5V via USB" --> BASE_GPS(RTK GPS Module)
 
     %% Internal Connection
-    BASE_GPS -- "UART (RTCM3x)" --> RADIO(Radio Module<br>on Base)
+    BASE_GPS -- "UART (RTCM3x)" --> RADIO(Radio Module<br>of Base Station)
+    ANT(GPS Antenna) -- "Signal" --> BASE_GPS
 
     %% Wireless Output
     RADIO -. "868 MHz RTCM Corrections" .-> ROVER(Radio Module<br>on Rover)
@@ -18,7 +19,8 @@ graph TD
 
 The GPS base station is a rather simple setup and was put together from remaining parts and simple 3D printed parts in order to make a solid yet reliable device.
 It is about 1000mm in height (to get the antenna off the ground without being too susceptable to wind) and the metal shield at the top has an excessive 300mm diameter (to reduce reflections as much as possible).
-It is powered by a regular powerbank and will run for quite some time on it as is only draws about XXXmA of current when sending correction data.
+It is also built from 20x20mm aluminium extrusions.
+The whole system is powered by a regular powerbank and will run for quite some time <!-- on it as is only draws about XXXmA of current when sending correction data -->.
 The antenna is put to the corner of the upper shield to be also elevated off the ground.
 
 ![gps_base1](./img/gps_base1.png)
@@ -37,4 +39,5 @@ This can then be entered in the config of the GPS base station to run it in fixe
 ## Links
 
 [GPS Base uBlox Config](./config/uBlox_F9P_Base_config.txt)<br>
-[XBee RTCM Config](./config/GPS_RTCM_XBeeSX686_fwA00A.xpro)
+[XBee RTCM Config](./config/GPS_RTCM_XBeeSX686_fwA00A.xpro)<br>
+[CAD files](./cad/)
