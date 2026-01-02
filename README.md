@@ -8,6 +8,8 @@ An open-source road marking rover with
 - multiple colors
 - dual use as a survey tool.
 
+![Bot_during_work](images/coming_soon.jpeg)
+
 ## License
 
 Everything described here can be freely worked in compliance with CC BY-NC-SA 4.0. Please see [License](./LICENSE) for further clarification or check [here](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en).
